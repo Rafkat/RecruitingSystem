@@ -47,7 +47,7 @@ class TestShadowArm(models.Model):
     third_question = models.CharField(max_length=200)
 
     def __str__(self):
-       return str(self.ordens_planet)
+        return str(self.ordens_planet)
 
 
 class Answers(models.Model):

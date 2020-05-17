@@ -88,7 +88,7 @@ class AnswerList(generic.DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
-        context['sith_id'] = self.request.GET.get('name_sith')
+        context['sith_id'] = self.request.GET.get('sith_id')
         return context
 
 
@@ -97,7 +97,6 @@ class ChooseRecruit(generic.UpdateView):
     pk_url_kwarg = 'id'
     fields = ['teacher_recruit']
     success_url = reverse_lazy('RecruitList')
-    template_name = 'system/recruitlist.html'
 
 
     # def get_context_data(self, *, object_list=None, **kwargs):
