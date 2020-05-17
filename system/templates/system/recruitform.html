@@ -1,0 +1,49 @@
+<form action="/system/saverecruit/" method="post">
+
+    {% csrf_token %}
+
+    <p align="center"> Name:
+
+        <input type="text" name="name_recruit" size="14">
+
+    </p>
+
+    <p align="center"> Age:
+
+        &nbsp;
+
+        <input type="text" name="age_recruit" size="14.5">
+
+    </p>
+
+    <p align="center"> Planet:
+        &nbsp; &nbsp;
+
+        <select name="planet_recruit">
+            <option>Choose planet</option>
+            {% if list_planet %}
+                {% for planet in list_planet %}
+                    <option value="{{ planet.id }}">{{ planet.name_planet }}</option>
+                {% endfor %}
+            {% else %}
+                <option>No planets</option>
+            {% endif %}
+        </select>
+
+    </p>
+
+    <p align="center"> E-mail:
+
+        <input type="text" name="email_recruit" size="13">
+
+    </p>
+
+    <p align="center">
+
+        <input type="submit" value="Next">
+
+    </p>
+
+
+
+</form>

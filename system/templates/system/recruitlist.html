@@ -1,0 +1,20 @@
+
+
+<table border="1" cellspacing="0" align="center" width="700px">
+
+
+{% if recruits_list %}
+    {%for recruits in recruits_list %}
+
+    <tr>
+        <td align="center">
+            {{recruits.name_recruit}}
+        </td>
+    </tr>
+
+    {% endfor %}
+{% else %}
+        <p> No recruits available. </p>
+{% endif %}
+
+</table>

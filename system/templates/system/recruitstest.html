@@ -1,0 +1,32 @@
+<form action="/system/savetest/" method="post">
+
+    {% csrf_token %}
+
+
+
+    <p align="center">
+        {{ first_question }}:
+        <input type="text" name="first_question" size="14">
+
+    </p>
+
+
+    <p align="center"> {{ second_question }}:
+        <input type="text" name="second_question" size="14">
+
+    </p>
+
+
+    <p align="center"> {{ third_question }}:
+        <input type="text" name="third_question" size="14">
+
+    </p>
+
+    <p align="center">
+
+        <input type="submit" value="Next">
+
+    </p>
+
+
+</form>
