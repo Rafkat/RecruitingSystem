@@ -3,12 +3,13 @@
 <table border="1" cellspacing="0" align="center" width="700px">
 
 
+
 {% if recruits_list %}
-    {%for recruits in recruits_list %}
+    {%for recruit in recruits_list %}
 
     <tr>
         <td align="center">
-            {{recruits.name_recruit}}
+            <a href="{% url 'AnswerList' id=recruit.id %}?sith_id={{ sith_id }}">{{recruit.name_recruit}}</a>
         </td>
     </tr>
 

@@ -31,7 +31,11 @@ class SithSide(generic.TemplateView):
 class SaveRecruit(generic.CreateView):
     model = Recruit
     fields = ['name_recruit', 'age_recruit', 'email_recruit', 'planet_recruit']
-    success_url = reverse_lazy('TestRecruit')
+
+    # success_url = reverse_lazy('TestRecruit')
+
+    def get_success_url(self):
+        return reverse_lazy('TestRecruit', kwargs={'id': self.object.id})
 
 
 class TestRecruit(generic.TemplateView):
@@ -40,7 +44,7 @@ class TestRecruit(generic.TemplateView):
     def get_context_data(self, **kwargs):
         recruits_planet = Recruit.objects.last().planet_recruit
         context = super().get_context_data(**kwargs)
-        # context['name_recruit'] = Recruit.objects.last().name_recruit
+        context['name_recruit'] = Recruit.objects.last()
         context['first_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).first_question
         context['second_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).second_question
         context['third_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).third_question
@@ -50,7 +54,7 @@ class TestRecruit(generic.TemplateView):
 class SaveTest(generic.CreateView):
     model = Answers
     # name_recruit = Recruit.objects.last().name_recruit
-    fields = ['first_question', 'second_question', 'third_question']
+    fields = ['first_question', 'second_question', 'third_question', 'name_recruit']
     success_url = reverse_lazy('ThankPage')
 
 
@@ -63,7 +67,40 @@ class RecruitList(generic.ListView):
     template_name = 'system/recruitlist.html'
     context_object_name = 'recruits_list'
 
-    #def get_context_data(self, *, object_list=None, **kwargs):
+    def get_queryset(self):
+        recruit_list = Recruit.objects.filter(teacher_recruit=None)
+        return recruit_list
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['sith_id'] = self.request.GET.get('name_sith')
+        return context
+
+
+class AnswerList(generic.DetailView):
+    model = Answers
+    template_name = 'system/answerlist.html'
+    context_object_name = 'answer'
+
+    def get_object(self, queryset=None):
+        answer = Answers.objects.get(name_recruit=self.kwargs.get('id'))
+        return answer
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['sith_id'] = self.request.GET.get('name_sith')
+        return context
+
+
+class ChooseRecruit(generic.UpdateView):
+    model = Recruit
+    pk_url_kwarg = 'id'
+    fields = ['teacher_recruit']
+    success_url = reverse_lazy('RecruitList')
+    template_name = 'system/recruitlist.html'
+
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
     #    context = super().get_context_data(**kwargs)
     #    context['recruit_list'] = Recruit.
 

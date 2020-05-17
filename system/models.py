@@ -21,7 +21,7 @@ class Planet(models.Model):
 
 
 class Sith(models.Model):
-    name_sith = models.CharField(max_length=200)
+    name_sith = models.CharField(max_length=200, unique=True)
     planet_sith = models.ForeignKey(Planet, default=None, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -29,7 +29,7 @@ class Sith(models.Model):
 
 
 class Recruit(models.Model):
-    teacher_recruit = models.ForeignKey(Sith, default=None, on_delete=models.CASCADE)
+    teacher_recruit = models.ForeignKey(Sith, null=True, on_delete=models.CASCADE)
     name_recruit = models.CharField(max_length=200)
     age_recruit = models.IntegerField(default=0)
     email_recruit = models.CharField(max_length=200)
@@ -47,7 +47,7 @@ class TestShadowArm(models.Model):
     third_question = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.ordens_planet
+       return str(self.ordens_planet)
 
 
 class Answers(models.Model):
