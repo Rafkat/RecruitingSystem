@@ -8,7 +8,7 @@
             <option>Choose yourself</option>
             {% if siths_list %}
                 {% for sith in siths_list %}
-                    <option value="{{ sith.id }}">{{ sith.name_sith }}</option>
+                    <option value="{{ sith.id }}">{{ sith.name }}</option>
                 {% endfor %}
             {% else %}
                 <option>No siths</option>

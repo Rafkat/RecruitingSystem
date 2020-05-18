@@ -1,10 +1,10 @@
-<form action="/saverecruit/" method="post">
+<form action="{% url 'SaveRecruit' %}" method="post">
 
     {% csrf_token %}
 
     <p align="center"> Name:
 
-        <input type="text" name="name_recruit" size="14">
+        <input type="text" name="name" size="14">
 
     </p>
 
@@ -12,18 +12,18 @@
 
         &nbsp;
 
-        <input type="text" name="age_recruit" size="14.5">
+        <input type="text" name="age" size="14.5">
 
     </p>
 
     <p align="center"> Planet:
         &nbsp; &nbsp;
 
-        <select name="planet_recruit">
+        <select name="planet">
             <option>Choose planet</option>
             {% if list_planet %}
                 {% for planet in list_planet %}
-                    <option value="{{ planet.id }}">{{ planet.name_planet }}</option>
+                    <option value="{{ planet.id }}">{{ planet.name }}</option>
                 {% endfor %}
             {% else %}
                 <option>No planets</option>
@@ -34,7 +34,7 @@
 
     <p align="center"> E-mail:
 
-        <input type="text" name="email_recruit" size="13">
+        <input type="text" name="email" size="13">
 
     </p>
 

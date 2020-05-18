@@ -15,7 +15,7 @@ class NewRecruit(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['list_planet'] = Planet.objects.order_by('name_planet')
+        context['list_planet'] = Planet.objects.order_by('name')
         return context
 
 
@@ -24,13 +24,13 @@ class SithSide(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['siths_list'] = Sith.objects.order_by('name_sith')
+        context['siths_list'] = Sith.objects.order_by('name')
         return context
 
 
 class SaveRecruit(generic.CreateView):
     model = Recruit
-    fields = ['name_recruit', 'age_recruit', 'email_recruit', 'planet_recruit']
+    fields = ['name', 'age', 'email', 'planet']
 
     # success_url = reverse_lazy('TestRecruit')
 
@@ -42,7 +42,7 @@ class TestRecruit(generic.TemplateView):
     template_name = "system/recruitstest.html"
 
     def get_context_data(self, **kwargs):
-        recruits_planet = Recruit.objects.last().planet_recruit
+        recruits_planet = Recruit.objects.last().planet
         context = super().get_context_data(**kwargs)
         context['name_recruit'] = Recruit.objects.last()
         context['first_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).first_question
@@ -68,7 +68,7 @@ class RecruitList(generic.ListView):
     context_object_name = 'recruits_list'
 
     def get_queryset(self):
-        recruit_list = Recruit.objects.filter(teacher_recruit=None)
+        recruit_list = Recruit.objects.filter(teacher=None)
         return recruit_list
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -95,7 +95,7 @@ class AnswerList(generic.DetailView):
 class ChooseRecruit(generic.UpdateView):
     model = Recruit
     pk_url_kwarg = 'id'
-    fields = ['teacher_recruit']
+    fields = ['teacher']
     success_url = reverse_lazy('RecruitList')
 
 

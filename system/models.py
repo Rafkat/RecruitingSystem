@@ -14,30 +14,29 @@ class NewRecruit(models.Manager):
 
 
 class Planet(models.Model):
-    name_planet = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name_planet
+        return self.name
 
 
 class Sith(models.Model):
-    name_sith = models.CharField(max_length=200, unique=True)
-    planet_sith = models.ForeignKey(Planet, default=None, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True, unique=True)
+    planet = models.ForeignKey(Planet, default=None, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name_sith
+        return self.name
 
 
 class Recruit(models.Model):
-    teacher_recruit = models.ForeignKey(Sith, null=True, on_delete=models.CASCADE)
-    name_recruit = models.CharField(max_length=200)
-    age_recruit = models.IntegerField(default=0)
-    email_recruit = models.CharField(max_length=200)
-    planet_recruit = models.ForeignKey(Planet,
-                                       on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Sith, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    age = models.IntegerField(default=0)
+    email = models.CharField(max_length=200)
+    planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name_recruit
+        return self.name
 
 
 class TestShadowArm(models.Model):
