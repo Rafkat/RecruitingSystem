@@ -50,15 +50,9 @@ class TestShadowArm(models.Model):
 
 
 class Answer(models.Model):
-    name_recruit = models.ForeignKey(Recruit, default=None, on_delete=models.CASCADE)
-    # question = models.ForeignKey(TestShadowArm, on_delete=models.CASCADE)
+    recruit = models.ForeignKey(Recruit, default=None, on_delete=models.CASCADE)
 
     first_question = models.CharField(default=None, max_length=200)
     second_question = models.CharField(default=None, max_length=200)
     third_question = models.CharField(default=None, max_length=200)
-    # second_answer_text = models.CharField(max_length=200)
-    # third_answer_text = models.CharField(max_length=200)
 
-    # def __str__(self):
-    #    return self.name_recruit
-# Create your models here.

@@ -32,17 +32,16 @@ class SithSide(generic.ListView):
 
 class TestRecruit(generic.CreateView):
     model = Answer
-    fields = ['first_question', 'second_question', 'third_question', 'name_recruit']
+    fields = ['first_question', 'second_question', 'third_question', 'recruit']
     success_url = reverse_lazy('ThankPage')
     template_name = "system/recruitstest.html"
 
     def get_context_data(self, **kwargs):
-        recruits_planet = Recruit.objects.get(id=self.kwargs.get('id')).planet
+        recruit = Recruit.objects.get(id=self.kwargs.get('id'))
+        question = TestShadowArm.objects.get(ordens_planet=recruit.planet)
         context = super().get_context_data(**kwargs)
-        context['name_recruit'] = Recruit.objects.get(id=self.kwargs.get('id'))
-        context['first_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).first_question
-        context['second_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).second_question
-        context['third_question'] = TestShadowArm.objects.get(ordens_planet=recruits_planet).third_question
+        context['name_recruit'] = recruit
+        context['question'] = question
         return context
 
 
@@ -68,7 +67,7 @@ class AnswerList(generic.DetailView):
     context_object_name = 'answer'
 
     def get_object(self, queryset=None):
-        answer = Answer.objects.get(name_recruit=self.kwargs.get('id'))
+        answer = Answer.objects.get(recruit=self.kwargs.get('id'))
         return answer
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -82,11 +81,3 @@ class ChooseRecruit(generic.UpdateView):
     pk_url_kwarg = 'id'
     fields = ['teacher']
     success_url = reverse_lazy('RecruitList')
-
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #    context = super().get_context_data(**kwargs)
-    #    context['recruit_list'] = Recruit.
-
-# def index(request):
-#    return HttpResponse("Hello,world. You're at the system.")
-# Create your views here.

@@ -1,4 +1,4 @@
-<form action="{% url 'ChooseRecruit' id=answer.name_recruit.id %}" method="post">
+<form action="{% url 'ChooseRecruit' id=answer.recruit.id %}" method="post">
 
 {% csrf_token %}
 
@@ -11,7 +11,7 @@
 
     <tr>
         <td align="center">
-            {{answer.name_recruit}}
+            {{answer.recruit }}
         </td>
     </tr>
 

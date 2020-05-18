@@ -1,23 +1,23 @@
-<form action="{% url 'SaveTest' %}" method="post">
+<form method="post">
 
     {% csrf_token %}
 
     <input type="hidden" name="name_recruit" value="{{ name_recruit.id }}">
 
     <p align="center">
-        {{ first_question }}:
+        {{ question.first_question }}:
         <input type="text" name="first_question" size="14">
 
     </p>
 
 
-    <p align="center"> {{ second_question }}:
+    <p align="center"> {{ question.second_question }}:
         <input type="text" name="second_question" size="14">
 
     </p>
 
 
-    <p align="center"> {{ third_question }}:
+    <p align="center"> {{ question.third_question }}:
         <input type="text" name="third_question" size="14">
 
     </p>
