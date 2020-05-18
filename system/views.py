@@ -1,3 +1,4 @@
+from django.forms import modelform_factory
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -12,7 +13,7 @@ class ChooseSide(generic.TemplateView):
 
 class CreateRecruit(generic.CreateView):
     model = Recruit
-    fields = ['name', 'age', 'email', 'planet']
+    form_class = modelform_factory(Recruit, fields=('name', 'age', 'email', 'planet'))
     template_name = "system/recruitform.html"
 
     def get_context_data(self, **kwargs):
@@ -40,7 +41,7 @@ class TestRecruit(generic.CreateView):
         recruit = Recruit.objects.get(id=self.kwargs.get('id'))
         question = TestShadowArm.objects.get(ordens_planet=recruit.planet)
         context = super().get_context_data(**kwargs)
-        context['name_recruit'] = recruit
+        context['recruit'] = recruit
         context['question'] = question
         return context
 

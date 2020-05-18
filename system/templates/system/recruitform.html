@@ -1,42 +1,8 @@
-<form action="{% url 'SaveRecruit' %}" method="post">
+<form method="post" align="center">
 
     {% csrf_token %}
+    {{ form.as_p }}
 
-    <p align="center"> Name:
-
-        <input type="text" name="name" size="14">
-
-    </p>
-
-    <p align="center"> Age:
-
-        &nbsp;
-
-        <input type="text" name="age" size="14.5">
-
-    </p>
-
-    <p align="center"> Planet:
-        &nbsp; &nbsp;
-
-        <select name="planet">
-            <option>Choose planet</option>
-            {% if list_planet %}
-                {% for planet in list_planet %}
-                    <option value="{{ planet.id }}">{{ planet.name }}</option>
-                {% endfor %}
-            {% else %}
-                <option>No planets</option>
-            {% endif %}
-        </select>
-
-    </p>
-
-    <p align="center"> E-mail:
-
-        <input type="text" name="email" size="13">
-
-    </p>
 
     <p align="center">
 
