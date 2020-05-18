@@ -49,7 +49,7 @@ class TestShadowArm(models.Model):
         return str(self.ordens_planet)
 
 
-class Answers(models.Model):
+class Answer(models.Model):
     name_recruit = models.ForeignKey(Recruit, default=None, on_delete=models.CASCADE)
     # question = models.ForeignKey(TestShadowArm, on_delete=models.CASCADE)
 
